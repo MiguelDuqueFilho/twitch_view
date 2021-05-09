@@ -246,34 +246,30 @@ const userbadges = {
   },
 };
 
-export function getBadges(obj: object = {}) {
+export function getBadges(obj: object = []) {
   let resp: string[] = [];
   let i = 0;
-  if (Object.keys(obj).length !== 0) {
-    let user = Object.keys(obj);
-    console.log(`getBadges user=${JSON.stringify(user)}`);
-    let map = new Map(Object.entries(userbadges));
-    console.log(`getBadges map=${JSON.stringify(map)}`);
-    Object.entries(user).forEach(([key, value]) => {
-      console.log(`getBadges forEach ${key}: ${value}`);
-      if (map.has(value)) {
-        const mapin = map.get(value);
-        console.log(`getBadges mapin=${JSON.stringify(mapin)}`);
-        console.log(`getBadges mapin?.svg=${JSON.stringify(mapin?.svg)}`);
-        if (mapin) {
-          resp[i] = mapin?.image;
-          i = i + 1;
+  if (obj !== null) {
+    if (Object.keys(obj).length !== 0) {
+      let user = Object.keys(obj);
+      console.log(`getBadges user=${JSON.stringify(user)}`);
+      let map = new Map(Object.entries(userbadges));
+      console.log(`getBadges map=${JSON.stringify(map)}`);
+      Object.entries(user).forEach(([key, value]) => {
+        console.log(`getBadges forEach ${key}: ${value}`);
+        if (map.has(value)) {
+          const mapin = map.get(value);
+          console.log(`getBadges mapin=${JSON.stringify(mapin)}`);
+          console.log(`getBadges mapin?.svg=${JSON.stringify(mapin?.svg)}`);
+          if (mapin) {
+            resp[i] = mapin?.image;
+            i = i + 1;
+          }
+          console.log(`getBadges resp=${JSON.stringify(resp)}`);
         }
-        console.log(`getBadges resp=${JSON.stringify(resp)}`);
-      }
-    });
+      });
+    }
 
-    // if (map.has(user[0])) {
-    //   const mapin = map.get(user[0]);
-    //   console.log(`getBadges mapin=${JSON.stringify(mapin)}`);
-    //   console.log(`getBadges mapin?.svg=${JSON.stringify(mapin?.svg)}`);
-    //   return mapin?.image;
-    // }
     return resp;
   }
 }

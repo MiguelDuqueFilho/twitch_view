@@ -16,7 +16,9 @@ interface clientTwitch {
 
 const TwitchUserItem: React.FC<TwitchUserItemProps> = ({ user }) => {
   const [twitchuser, setTwitchuser] = useState<clientTwitch>({ client: user });
-  const [imgs, setImgs] = useState(getBadges(twitchuser.client.badges));
+  const [imgs, setImgs] = useState(
+    twitchuser.client.badges ? getBadges(twitchuser.client.badges) : []
+  );
 
   useEffect(() => {
     setTwitchuser({ client: user });
@@ -66,8 +68,12 @@ const TwitchUserItem: React.FC<TwitchUserItemProps> = ({ user }) => {
         <p>
           <strong>{twitchuser.client['user-id']}</strong>
         </p>
-        <FiAlertTriangle size={20} className='icon' color={'gray'} />
-        <GiHumanCannonball size={20} className='icon' color={'gray'} />
+        <i className='timeout' onClick={() => {}}>
+          <FiAlertTriangle size={20} className='icon' color={'gray'} />
+        </i>
+        <i className='ban' onClick={() => {}}>
+          <GiHumanCannonball size={20} className='icon' color={'gray'} />
+        </i>
       </footer>
     </article>
   );

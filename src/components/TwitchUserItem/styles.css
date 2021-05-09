@@ -1,0 +1,97 @@
+.twitch-item {
+  background: var(--color-box-base);
+  border: 1px solid var(--color-line-in-white);
+  border-radius: 0.8rem;
+  overflow: hidden;
+  min-width: 160px;
+  margin: 1rem;
+}
+
+.twitch-item header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 1rem;
+}
+/* 
+.twitch-item header img {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+} */
+
+.twitch-item header p {
+  font-size: 1.5rem;
+  line-height: 1rem;
+}
+
+.twitch-item header div {
+  width: 100%;
+  margin: 0 1rem;
+}
+
+.twitch-item .twitch-user strong {
+  font: 500 1.4rem Archivo;
+  display: block;
+  color: var(--color-text-title);
+}
+
+.twitch-item .twitch-user span {
+  font-size: 1rem;
+  display: block;
+}
+
+.twitch-item .mensagem .title-emotion {
+  font-weight: 400;
+  font-size: 0.7em;
+  margin: 1rem;
+  color: var(--color-secondary);
+}
+
+.twitch-item .emotion > img {
+  width: 13px;
+  height: 13px;
+}
+
+.twitch-item .mensagem .emotion {
+  font-size: 0.7em;
+  margin: 0 1rem;
+}
+
+.twitch-item footer {
+  background: var(--color-box-footer);
+  border-top: 1px solid var(--color-line-in-white);
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.twitch-item footer p strong {
+  color: var(--color-primary);
+  font-size: 1rem;
+  display: block;
+  margin-left: 1rem;
+}
+
+.twitch-item footer svg {
+  color: var(--color-text-base);
+  cursor: pointer;
+  margin-left: 7px;
+}
+
+.twitch-item footer svg:hover {
+  color: var(--color-text-complement);
+}
+
+@media (min-width: 700px) {
+  .twitch-item header,
+  .twitch-item footer {
+    padding: 0.5rem;
+  }
+
+  .twitch-item footer p strong {
+    display: initial;
+    margin-left: 1rem;
+  }
+}

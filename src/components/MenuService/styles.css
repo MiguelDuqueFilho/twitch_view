@@ -1,0 +1,23 @@
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 20%;
+  margin-left: 10px;
+  color: var(--color-button-text);
+}
+
+.menu .icon {
+  /* margin-left: 10px;
+  height: 3.2rem;
+  transition: opacity 0.2s; */
+  /* color: var(--color-button-text); */
+}
+
+.menu .icon:hover {
+  opacity: 0.6;
+}
+
+@media (min-width: 700px) {
+}

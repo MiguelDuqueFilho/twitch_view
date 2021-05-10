@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './styles.css';
 import { FiTwitch } from 'react-icons/fi';
-import { RiVipLine } from 'react-icons/ri';
+import { RiDashboard2Line } from 'react-icons/ri';
 
 import logoImg from '../../assets/images/logo.svg';
 import landingImg from '../../assets/images/landing.svg';
@@ -30,13 +30,13 @@ const Landing: React.FC = () => {
           className='hero-image'
         />
         <div className='buttons-container'>
-          <Link to='/twitchuseract' className='twitch-user'>
+          <Link to='/twitch-user-list' className='twitch-user'>
             <FiTwitch size={32} className='icon' />
             Usuários ativos
           </Link>
-          <Link to='/twitch-user-vip' className='twitch-user-vip'>
-            <RiVipLine size={32} className='icon' />
-            Usuários vips
+          <Link to='/dashboard-bot' className='dashboard-bot'>
+            <RiDashboard2Line size={32} className='icon' />
+            Dashboard
           </Link>
         </div>
         <span className='total-connections'>

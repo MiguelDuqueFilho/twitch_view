@@ -68,7 +68,7 @@
   background-color: var(--color-primary-lighter);
 }
 
-.buttons-container a.twitch-user-vip {
+.buttons-container a.dashboard-bot {
   background-color: var(--color-secondary);
 }
 
@@ -76,7 +76,7 @@
   background-color: var(--color-primary-light);
 }
 
-.buttons-container a.twitch-user-vip:hover {
+.buttons-container a.dashboard-bot:hover {
   background-color: var(--color-secondary-dark);
 }
 

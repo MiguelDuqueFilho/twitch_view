@@ -19,11 +19,25 @@ const TwitchUserItem: React.FC<TwitchUserItemProps> = ({ user }) => {
   const [imgs, setImgs] = useState(
     twitchuser.client.badges ? getBadges(twitchuser.client.badges) : []
   );
+  const [typeUser, setTypeUser] = useState(twitchuser.client['user-id']);
 
   useEffect(() => {
     setTwitchuser({ client: user });
     setImgs(getBadges(twitchuser.client.badges));
-  }, [user, twitchuser.client.badges]);
+
+    function getTypeUser() {
+      let type: string = twitchuser.client['user-id'];
+      if (twitchuser.client.subscriber) {
+        type = 'Assinante';
+      }
+      if (twitchuser.client['user-type'] !== null) {
+        type = twitchuser.client['user-type'] + ' ';
+      }
+
+      setTypeUser(type);
+    }
+    getTypeUser();
+  }, [user, twitchuser.client]);
 
   const props = {
     dangerouslySetInnerHTML: {
@@ -33,7 +47,7 @@ const TwitchUserItem: React.FC<TwitchUserItemProps> = ({ user }) => {
     },
   };
 
-  twitchuser.client.badges && getBadges(twitchuser.client.badges);
+  // twitchuser.client.badges && getBadges(twitchuser.client.badges);
 
   return (
     <article className='twitch-item'>
@@ -66,7 +80,7 @@ const TwitchUserItem: React.FC<TwitchUserItemProps> = ({ user }) => {
       /> */}
       <footer>
         <p>
-          <strong>{twitchuser.client['user-id']}</strong>
+          <strong>{typeUser}</strong>
         </p>
         <i className='timeout' onClick={() => {}}>
           <FiAlertTriangle size={20} className='icon' color={'gray'} />

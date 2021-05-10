@@ -28,9 +28,32 @@ export interface BotContextData {
   statusConn: number;
   statusBot: boolean;
   clients: TwitchUser;
+  roomState: RommStateData;
   SetInitBot(value: boolean): void;
   ClearClients(): void;
 }
+
+export interface RommStateData {
+  'emote-only': boolean;
+  'followers-only': string;
+  r9k: boolean;
+  rituals: boolean;
+  'room-id': string;
+  slow: boolean;
+  'subs-only': boolean;
+  channel: string;
+}
+
+const rommStateinit = {
+  'emote-only': false,
+  'followers-only': '',
+  r9k: false,
+  rituals: false,
+  'room-id': '',
+  slow: false,
+  'subs-only': false,
+  channel: '',
+};
 
 const BotContext = createContext<BotContextData>({} as BotContextData);
 const client = new W3CWebSocket('ws://127.0.0.1:8000');
@@ -39,11 +62,12 @@ export const BotProvider: React.FC = ({ children }) => {
   const [clients, setClients] = useState<TwitchUser>({});
   const [statusConn, setStatusConn] = useState<number>(W3CWebSocket.CLOSED);
   const [statusBot, setStatusBot] = useState<boolean>(false);
+  const [roomState, setRoomState] = useState<RommStateData>(rommStateinit);
   // const [messageReceived, setMessageReceived] = useState<string>('');
 
   useEffect(() => {
     // client = new W3CWebSocket('ws://127.0.0.1:8000');
-
+    setStatusBot(false);
     client.onerror = function () {
       console.log('Connection Error');
     };
@@ -80,6 +104,9 @@ export const BotProvider: React.FC = ({ children }) => {
         break;
       case 'clients':
         setClients(objMsg.data);
+        break;
+      case 'roomstate':
+        setRoomState(objMsg.data);
         break;
       case 'twitchMsg':
         // if (!user['emotes'] || user['emotes'].length === 0) {
@@ -129,6 +156,7 @@ export const BotProvider: React.FC = ({ children }) => {
         statusBot,
         statusConn,
         clients,
+        roomState,
         SetInitBot,
         ClearClients,
       }}

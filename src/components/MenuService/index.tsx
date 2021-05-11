@@ -32,7 +32,7 @@ const MenuService = () => {
         <FiRefreshCcw
           size={32}
           className='icon'
-          color={statusBot ? 'white' : `black`}
+          color={statusBot ? 'white' : `#d4c2ff`}
         />
       </i>
       <i
@@ -44,7 +44,7 @@ const MenuService = () => {
         <FiTwitch
           size={32}
           className='icon'
-          color={statusTtv ? 'white' : `black`}
+          color={statusTtv ? 'white' : `#d4c2ff`}
         />
         {statusTtv ? 'on' : 'off'}
       </i>
@@ -52,7 +52,7 @@ const MenuService = () => {
         <FiServer
           size={32}
           className='icon'
-          color={statusConn !== W3CWebSocket.OPEN ? 'black' : 'white'}
+          color={statusConn !== W3CWebSocket.OPEN ? '#d4c2ff' : 'white'}
         />{' '}
         {statusConn === W3CWebSocket.OPEN ? 'on' : 'off'}
       </i>

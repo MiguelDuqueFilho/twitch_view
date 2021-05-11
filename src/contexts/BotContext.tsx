@@ -31,6 +31,9 @@ export interface BotContextData {
   roomState: RommStateData;
   SetInitBot(value: boolean): void;
   ClearClients(): void;
+  Ban(username: string): void;
+  Timeout(username: string): void;
+  R9k(onoff: boolean): void;
 }
 
 export interface RommStateData {
@@ -149,6 +152,42 @@ export const BotProvider: React.FC = ({ children }) => {
     }
   }
 
+  function Ban(username: string) {
+    if (statusConn === W3CWebSocket.OPEN) {
+      const data = {
+        type: 'cmdttv',
+        data: { cmd: 'ban', cmddata: { username } },
+      };
+      client.send(JSON.stringify(data));
+    } else {
+      console.log('WebSocket not Open');
+    }
+  }
+
+  function Timeout(username: string) {
+    if (statusConn === W3CWebSocket.OPEN) {
+      const data = {
+        type: 'cmdttv',
+        data: { cmd: 'timeout', cmddata: { username } },
+      };
+      client.send(JSON.stringify(data));
+    } else {
+      console.log('WebSocket not Open');
+    }
+  }
+
+  function R9k(OnOff: boolean) {
+    if (statusConn === W3CWebSocket.OPEN) {
+      const data = {
+        type: 'cmdttv',
+        data: { cmd: 'r9k', cmddata: { status: OnOff } },
+      };
+      client.send(JSON.stringify(data));
+    } else {
+      console.log('WebSocket not Open');
+    }
+  }
+
   return (
     <BotContext.Provider
       value={{
@@ -159,6 +198,9 @@ export const BotProvider: React.FC = ({ children }) => {
         roomState,
         SetInitBot,
         ClearClients,
+        Ban,
+        Timeout,
+        R9k,
       }}
     >
       {children}

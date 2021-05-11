@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './styles.css';
 
 import { GiHumanCannonball } from 'react-icons/gi';
-import { FiAlertTriangle } from 'react-icons/fi';
-import { TwitchUserValue } from '../../contexts/BotContext';
+import { FaHourglassStart } from 'react-icons/fa';
+import { TwitchUserValue, useBot } from '../../contexts/BotContext';
 import { getMessageHTML, getBadges } from '../../services/utils';
 
 interface TwitchUserItemProps {
@@ -15,6 +15,7 @@ interface clientTwitch {
 }
 
 const TwitchUserItem: React.FC<TwitchUserItemProps> = ({ user }) => {
+  const { Timeout, Ban } = useBot();
   const [twitchuser, setTwitchuser] = useState<clientTwitch>({ client: user });
   const [imgs, setImgs] = useState(
     twitchuser.client.badges ? getBadges(twitchuser.client.badges) : []
@@ -82,10 +83,20 @@ const TwitchUserItem: React.FC<TwitchUserItemProps> = ({ user }) => {
         <p>
           <strong>{typeUser}</strong>
         </p>
-        <i className='timeout' onClick={() => {}}>
-          <FiAlertTriangle size={20} className='icon' color={'gray'} />
+        <i
+          className='timeout'
+          onClick={() => {
+            Timeout(twitchuser.client.username);
+          }}
+        >
+          <FaHourglassStart size={16} className='icon' color={'gray'} />
         </i>
-        <i className='ban' onClick={() => {}}>
+        <i
+          className='ban'
+          onClick={() => {
+            Ban(twitchuser.client.username);
+          }}
+        >
           <GiHumanCannonball size={20} className='icon' color={'gray'} />
         </i>
       </footer>

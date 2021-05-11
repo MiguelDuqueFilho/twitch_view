@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './styles.css';
 
 import PageHeader from '../../components/PageHeader';
-
+import { GrConnect } from 'react-icons/gr';
 import { useBot, RommStateData } from '../../contexts/BotContext';
 
 const DashboardBot: React.FC = () => {
-  const { clients, statusConn, statusBot, roomState } = useBot();
+  const { clients, statusConn, statusBot, roomState, R9k } = useBot();
   const [totalClients, setTotalClients] = useState(0);
   const [channelStatus, setchannelStatus] = useState<RommStateData>(roomState);
 
@@ -26,20 +26,18 @@ const DashboardBot: React.FC = () => {
         <section className='cards'>
           <span className='section-header'>Comunicação status</span>
           <div className='card-content'>
-            <span className='cards-item'>
+            <span className='card-item'>
               Server :{' '}
               <span
-                className={`cards-item-dados ${statusConn ? 'ok' : 'alert'}`}
+                className={`card-item-dados ${statusConn ? 'ok' : 'alert'}`}
               >
-                {statusConn ? 'Ativo' : 'Inativo'}
+                {statusConn ? 'On' : 'Off'}
               </span>
             </span>
-            <span className='cards-item'>
+            <span className='card-item'>
               Twitch :{' '}
-              <span
-                className={`cards-item-dados ${statusBot ? 'ok' : 'alert'}`}
-              >
-                {statusBot ? 'Ativo' : 'Inativo'}
+              <span className={`card-item-dados ${statusBot ? 'ok' : 'alert'}`}>
+                {statusBot ? 'On' : 'Off'}
               </span>
             </span>
           </div>
@@ -47,87 +45,119 @@ const DashboardBot: React.FC = () => {
         <section className='cards'>
           <span className='section-header'>Canal status</span>
           <div className='card-content'>
-            <span className='cards-item'>
+            <span className='card-item'>
               channel :{' '}
-              <span className='cards-item-dados ok'>
+              <span className='card-item-dados ok'>
                 {channelStatus.channel}
               </span>
             </span>
-            <span className='cards-item'>
+            <span className='card-item'>
               roomId :{' '}
-              <span className='cards-item-dados ok'>
+              <span className='card-item-dados ok'>
                 {channelStatus['room-id']}
               </span>
             </span>
-            <span className='cards-item'>
+            <span className='card-item'>
               Modo somente Emote :{' '}
               <span
-                className={`cards-item-dados ${
+                className={`card-item-dados ${
                   channelStatus['emote-only'] ? 'alert' : ''
                 }`}
               >
-                {channelStatus['emote-only'] ? 'Ativo' : 'Inativo'}
+                {channelStatus['emote-only'] ? 'On' : 'Off'}
               </span>
             </span>
-            <span className='cards-item'>
+            <span className='card-item'>
               Modo somente Seguidores :{' '}
               <span
-                className={`cards-item-dados ${
+                className={`card-item-dados ${
                   channelStatus['followers-only'] !== '-1' ? 'alert' : ''
                 }`}
               >
                 {channelStatus['followers-only']}
               </span>
             </span>
-            <span className='cards-item'>
+            <span className='card-item'>
               Modo R9k :{' '}
               <span
-                className={`cards-item-dados ${
+                className={`card-item-dados ${
                   channelStatus.r9k ? 'alert' : ''
                 }`}
               >
-                {channelStatus.r9k ? 'Ativo' : 'Inativo'}
+                {channelStatus.r9k ? 'On' : 'Off'}
               </span>
             </span>
-            <span className='cards-item'>
+            <span className='card-item'>
               Modo Rituals :{' '}
               <span
-                className={`cards-item-dados ${
+                className={`card-item-dados ${
                   channelStatus.rituals ? 'alert' : ''
                 }`}
               >
-                {channelStatus.rituals ? 'Ativo' : 'Inativo'}
+                {channelStatus.rituals ? 'On' : 'Off'}
               </span>
             </span>
-            <span className='cards-item'>
+            <span className='card-item'>
               Modo Slow :{' '}
               <span
-                className={`cards-item-dados ${
+                className={`card-item-dados ${
                   channelStatus.slow ? 'alert' : ''
                 }`}
               >
-                {channelStatus.slow ? 'Ativo' : 'Inativo'}
+                {channelStatus.slow ? 'On' : 'Off'}
               </span>
             </span>
-            <span className='cards-item'>
+            <span className='card-item'>
               {/* subscribe = assinantes */}
               Modo somente Assinantes :{' '}
               <span
-                className={`cards-item-dados ${
+                className={`card-item-dados ${
                   channelStatus['subs-only'] ? 'alert' : ''
                 }`}
               >
-                {channelStatus['subs-only'] ? 'Ativo' : 'Inativo'}
+                {channelStatus['subs-only'] ? 'On' : 'Off'}
               </span>
+            </span>
+          </div>
+        </section>
+        <section className='cards'>
+          <span className='section-header'>Acões do canal</span>
+          <div className='card-content'>
+            <span className='card-item'>
+              <span className='card-ref'>Comercial</span>
+              <i
+                onClick={() => {
+                  alert('comercial acionado');
+                }}
+              >
+                <GrConnect
+                  size={20}
+                  className='icon'
+                  color={true ? 'green' : `black`}
+                />
+              </i>
+            </span>
+            <span className='card-item'>
+              <span className='card-ref'>R9k</span>
+              <i
+                onClick={() => {
+                  R9k(!channelStatus.r9k);
+                }}
+              >
+                <GrConnect
+                  size={20}
+                  className='icon'
+                  color={true ? 'green' : `black`}
+                />
+              </i>
             </span>
           </div>
         </section>
         <section className='cards'>
           <span className='section-header'>Usuários bot</span>
           <div className='card-content'>
-            <span className='cards-item '>
-              Total :{' '}
-              <span className='cards-item-dados ok'>{totalClients}</span>{' '}
+            <span className='card-item '>
+              Total : <span className='card-item-dados ok'>{totalClients}</span>{' '}
               usuários
             </span>
           </div>

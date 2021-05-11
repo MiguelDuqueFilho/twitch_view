@@ -9,10 +9,7 @@
 }
 
 .menu .icon {
-  /* margin-left: 10px;
-  height: 3.2rem;
-  transition: opacity 0.2s; */
-  /* color: var(--color-button-text); */
+  cursor: pointer;
 }
 
 .menu .icon:hover {
